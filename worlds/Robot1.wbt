@@ -1,14 +1,53 @@
 #VRML_SIM R2019a utf8
 WorldInfo {
-  info [
-  ]
 }
 Viewpoint {
-  orientation -0.7 0.7 0.2 0.75
-  position 1.2 1.6 2.3
-
+  orientation -0.9664326720487262 -0.2558515140697271 -0.02340711740021035 0.33567955169673475
+  position 0.06705556722269952 0.2770573997544821 0.7370460855091159
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
+}
+Floor {
+}
+Robot {
+  translation 0 0.075 0
+  children [
+    Solid {
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.07 0.25
+          }
+        }
+        HingeJoint {
+          device [
+            RotationalMotor {
+              name "motor"
+            }
+          ]
+          endPoint Solid {
+            translation 0.06 0 0.05
+            rotation 0 0 1 1.57
+            children [
+              Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.075
+                }
+              }
+              HingeJoint {
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+  controller "Robot1"
 }
