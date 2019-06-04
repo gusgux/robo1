@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.9664326720487262 -0.2558515140697271 -0.02340711740021035 0.33567955169673475
-  position 0.06705556722269952 0.2770573997544821 0.7370460855091159
+  orientation -0.3343904791215626 0.8779503873700939 0.3426165856895343 1.706739988713654
+  position 0.6446930268430104 0.41643634885754627 -0.00020832476036646008
 }
 TexturedBackground {
 }
@@ -12,42 +12,50 @@ TexturedBackgroundLight {
 Floor {
 }
 Robot {
-  translation 0 0.075 0
+  translation 0 0.05 0
+  rotation 1 0 0 0
   children [
-    Solid {
-      children [
-        Shape {
-          appearance PBRAppearance {
-          }
-          geometry Box {
-            size 0.1 0.07 0.25
-          }
-        }
-        HingeJoint {
-          device [
-            RotationalMotor {
-              name "motor"
-            }
-          ]
-          endPoint Solid {
-            translation 0.06 0 0.05
-            rotation 0 0 1 1.57
-            children [
-              Shape {
-                appearance PBRAppearance {
-                }
-                geometry Cylinder {
-                  height 0.02
-                  radius 0.075
-                }
-              }
-              HingeJoint {
-              }
-            ]
-          }
+    DEF ROBOT_BODY Shape {
+      appearance PBRAppearance {
+      }
+      geometry DEF G_BODY Box {
+        size 0.25 0.07 0.1
+      }
+    }
+    DEF WHEEL_JOINT HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.05 0 0.06
+      }
+      device [
+        RotationalMotor {
+          name "motor_right"
         }
       ]
+      endPoint DEF WHEEL_1 Solid {
+        translation -0.05 0 0.06
+        rotation 1 0 0 1.57
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry DEF G_WHEEL Cylinder {
+              height 0.02
+              radius 0.075
+            }
+          }
+        ]
+        boundingObject USE G_WHEEL
+        physics Physics {
+        }
+      }
     }
   ]
+  boundingObject USE G_BODY
+  physics Physics {
+  }
   controller "Robot1"
 }
