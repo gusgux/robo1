@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.07872928204153981 0.9661959069355058 0.24549372613225523 2.51573661358599
-  position 1.0968403797568467 0.6598200183240053 -0.7130804962360257
+  orientation -0.10448768814122152 0.9738162301294405 0.20190164180458622 2.1775591014614806
+  position 1.6277672290629328 0.6079710051730546 -1.101515471621672
 }
 TexturedBackground {
 }
@@ -12,15 +12,34 @@ TexturedBackgroundLight {
 Floor {
 }
 Robot {
-  translation 0 0.035 0
+  translation 0 0.08 0
   rotation 1 0 0 0
   children [
-    DEF ROBOT_BODY Shape {
-      appearance PBRAppearance {
-      }
-      geometry DEF G_BODY Box {
-        size 0.25 0.07 0.1
-      }
+    DEF GR_BODY Group {
+      children [
+        DEF ROBOT_BODY Shape {
+          appearance PBRAppearance {
+          }
+          geometry DEF G_BODY Box {
+            size 0.25 0.07 0.1
+          }
+        }
+        Transform {
+          translation 0.11 -0.05 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                roughness 1
+                metalness 0
+              }
+              geometry Sphere {
+                radius 0.03
+              }
+            }
+          ]
+        }
+      ]
     }
     DEF WHEEL_JOINT HingeJoint {
       jointParameters HingeJointParameters {
@@ -76,7 +95,7 @@ Robot {
       }
     }
   ]
-  boundingObject USE G_BODY
+  boundingObject USE GR_BODY
   physics Physics {
   }
   controller "Robot1"
