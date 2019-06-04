@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.17931621899006708 0.9710069033393681 0.15808632854993337 1.4349704398151548
-  position 1.535551017473615 0.47510865313965833 0.21097930140629817
+  orientation -0.07872928204153981 0.9661959069355058 0.24549372613225523 2.51573661358599
+  position 1.0968403797568467 0.6598200183240053 -0.7130804962360257
 }
 TexturedBackground {
 }
@@ -34,9 +34,9 @@ Robot {
       ]
       endPoint DEF WHEEL_1 Solid {
         translation -0.05 0 0.06
-        rotation 1 0 0 1.57
+        rotation 0.40779432835262774 0.6453835623758893 -0.6458977033388769 3.9165647108573847
         children [
-          Shape {
+          DEF SHAPE_WHEEL Shape {
             appearance PBRAppearance {
               baseColor 0 0 0
               roughness 1
@@ -49,6 +49,28 @@ Robot {
           }
         ]
         boundingObject USE G_WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL_2_JOINT HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.05 0 -0.06
+      }
+      device [
+        RotationalMotor {
+          name "motor_left"
+        }
+      ]
+      endPoint Solid {
+        translation -0.05 0 -0.06
+        rotation 1 0 0 1.57
+        children [
+          USE SHAPE_WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE SHAPE_WHEEL
         physics Physics {
         }
       }
